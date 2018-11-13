@@ -1,0 +1,4 @@
+
+EfCoreApi/bin/*
+EfCoreApi/obj/*
+*.user
