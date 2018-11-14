@@ -13,16 +13,25 @@ namespace EfCoreApi
 
         }
 
-        public DbSet<TestDoc> TestDocs { get; set; }
-
+        public DbSet<UserDoc> UserDocs { get; set; }
+        public DbSet<CarDoc> CarDocs { get; set; }
 
     }
 
-    public class TestDoc
+    public class UserDoc
     {
-        public Guid id { get; set; }
+        public Guid id { get; set; } = new Guid();
         public string Name { get; set; }
         public string Email { get; set; }
 
     }
+
+    public class CarDoc
+    {
+        public Guid id { get; set; } = new Guid();
+        public string Make { get; set; }
+        public string Model { get; set; }
+
+    }
+
 }
