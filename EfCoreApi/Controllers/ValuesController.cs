@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 
@@ -17,41 +18,63 @@ namespace EfCoreApi.Controllers
         {
             _context = efTestContext;
         }
-        // GET api/values
+        
+        /// <summary>
+        /// Gets all the UserDocs
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         [Route("user")]
-        public async Task<IActionResult> GetUser()
+        [ProducesResponseType((int)HttpStatusCode.OK, Type = typeof(UserDoc[]))]
+        public async Task<IActionResult> GetUsers()
         {
             return Ok(_context.UserDocs.Where(entry => entry.Name != null));
             
         }
 
-        // GET api/values
+        /// <summary>
+        /// Gets all the CarDocs
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         [Route("car")]
-        public async Task<IActionResult> GetCar()
+        [ProducesResponseType((int)HttpStatusCode.OK, Type=typeof(CarDoc[]))]
+        public async Task<IActionResult> GetCars()
         {
             return Ok(_context.CarDocs.Where(entry => entry.Model != null));
         }
 
-        // GET api/values/5
-        [HttpGet("{id}")]
-        public ActionResult<string> Get(int id)
+        /// <summary> 
+        /// Gets a set of CarDocs by make
+        /// </summary>
+        /// <param name="make"></param>
+        /// <returns></returns>
+        [HttpGet()]
+        [Route("car/{make}")]
+        public ActionResult<string> GetCarByMake([FromRoute] string make)
         {
-            return "value";
+            return Ok(_context.CarDocs.Where(car => car.Make == make));
         }
 
-        // POST api/values
+        /// <summary>
+        /// Posts a UserDoc
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
         [HttpPost]
         [Route("user")]
-        public async Task<IActionResult> Post([FromBody] UserDoc value)
+        public async Task<IActionResult> PostUser([FromBody] UserDoc value)
         {
             _context.UserDocs.Add(value);
             await _context.SaveChangesAsync();
             return Ok();
         }
 
-        // POST api/values
+        /// <summary>
+        /// Posts a CarDoc
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
         [HttpPost]
         [Route("car")]
         public async Task<IActionResult> PostCar([FromBody] CarDoc value)
@@ -61,16 +84,5 @@ namespace EfCoreApi.Controllers
             return Ok();
         }
 
-        // PUT api/values/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
-        {
-        }
-
-        // DELETE api/values/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
-        }
     }
 }
