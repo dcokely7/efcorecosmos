@@ -19,10 +19,19 @@ namespace EfCoreApi.Controllers
         }
         // GET api/values
         [HttpGet]
-        public async Task<IActionResult> Get()
+        [Route("user")]
+        public async Task<IActionResult> GetUser()
         {
-            return Ok(_context.TestDocs.Where(entry => entry.Name != null));
+            return Ok(_context.UserDocs.Where(entry => entry.Name != null));
             
+        }
+
+        // GET api/values
+        [HttpGet]
+        [Route("car")]
+        public async Task<IActionResult> GetCar()
+        {
+            return Ok(_context.CarDocs.Where(entry => entry.Model != null));
         }
 
         // GET api/values/5
@@ -34,12 +43,22 @@ namespace EfCoreApi.Controllers
 
         // POST api/values
         [HttpPost]
-        public async Task<IActionResult> Post([FromBody] TestDoc value)
+        [Route("user")]
+        public async Task<IActionResult> Post([FromBody] UserDoc value)
         {
-            _context.TestDocs.Add(value);
+            _context.UserDocs.Add(value);
             await _context.SaveChangesAsync();
             return Ok();
+        }
 
+        // POST api/values
+        [HttpPost]
+        [Route("car")]
+        public async Task<IActionResult> PostCar([FromBody] CarDoc value)
+        {
+            _context.CarDocs.Add(value);
+            await _context.SaveChangesAsync();
+            return Ok();
         }
 
         // PUT api/values/5
