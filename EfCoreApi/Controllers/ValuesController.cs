@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
@@ -18,6 +16,18 @@ namespace EfCoreApi.Controllers
         {
             _context = efTestContext;
         }
+
+        /// <summary>
+        /// Endpoint to configure Cosmos
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        [Route("configure")]
+        public IActionResult Configure()
+        {
+            _context.Database.EnsureCreated();
+            return Ok();
+        }
         
         /// <summary>
         /// Gets all the UserDocs
@@ -26,7 +36,7 @@ namespace EfCoreApi.Controllers
         [HttpGet]
         [Route("user")]
         [ProducesResponseType((int)HttpStatusCode.OK, Type = typeof(UserDoc[]))]
-        public async Task<IActionResult> GetUsers()
+        public IActionResult GetUsers()
         {
             return Ok(_context.UserDocs.Where(entry => entry.Name != null));
             
@@ -39,7 +49,7 @@ namespace EfCoreApi.Controllers
         [HttpGet]
         [Route("car")]
         [ProducesResponseType((int)HttpStatusCode.OK, Type=typeof(CarDoc[]))]
-        public async Task<IActionResult> GetCars()
+        public IActionResult GetCars()
         {
             return Ok(_context.CarDocs.Where(entry => entry.Model != null));
         }
@@ -51,7 +61,7 @@ namespace EfCoreApi.Controllers
         /// <returns></returns>
         [HttpGet()]
         [Route("car/{make}")]
-        public ActionResult<string> GetCarByMake([FromRoute] string make)
+        public IActionResult GetCarByMake([FromRoute] string make)
         {
             return Ok(_context.CarDocs.Where(car => car.Make == make));
         }

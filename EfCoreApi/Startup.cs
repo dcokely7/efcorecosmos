@@ -1,7 +1,3 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -30,7 +26,7 @@ namespace EfCoreApi
 
             services.AddDbContext<EfTestContext>(options =>
             {
-                options.UseCosmosSql(
+                options.UseCosmos(
                 "https://eftest.documents.azure.com:443/",
                 "qFTBEItlvHcfXrVeMvPSjbh7dUVx7w5TdidAmzQOh8TFP5vkrHp0OFzyVZi1jXUjG44q1Ed2xlJPGXl0ENvy5w==",
                 "data");
