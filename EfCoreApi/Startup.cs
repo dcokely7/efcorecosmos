@@ -26,6 +26,7 @@ namespace EfCoreApi
 
             services.AddDbContext<EfTestContext>(options =>
             {
+                // these settings are just placeholders and wont run, sub in your own values here
                 options.UseCosmos(
                 "https://eftest.documents.azure.com:443/",
                 "qFTBEItlvHcfXrVeMvPSjbh7dUVx7w5TdidAmzQOh8TFP5vkrHp0OFzyVZi1jXUjG44q1Ed2xlJPGXl0ENvy5w==",
