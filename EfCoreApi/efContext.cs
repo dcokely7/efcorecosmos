@@ -1,8 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace EfCoreApi
 {
@@ -10,7 +7,7 @@ namespace EfCoreApi
     {
         public EfTestContext(DbContextOptions<EfTestContext> options) : base(options)
         {
-
+            
         }
 
         public DbSet<UserDoc> UserDocs { get; set; }
@@ -20,7 +17,7 @@ namespace EfCoreApi
 
     public class UserDoc
     {
-        public Guid id { get; set; } = new Guid();
+        public string id { get; set; }
         public string Name { get; set; }
         public string Email { get; set; }
 
@@ -28,7 +25,7 @@ namespace EfCoreApi
 
     public class CarDoc
     {
-        public Guid id { get; set; } = new Guid();
+        public string id { get; set; }
         public string Make { get; set; }
         public string Model { get; set; }
 
